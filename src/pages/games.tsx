@@ -8,13 +8,6 @@ export default function Games() {
     const navigate = useNavigate();
     const authToken = localStorage.getItem("authTokenbb");
 
-    useEffect(() => {
-        if (!authToken) {
-            navigate("/login");
-        }
-    }, [authToken, navigate]);
-    if (!authToken) return null;
-
     return (
         <div className="flex flex-col h-screen relative">
             <section className="sticky top-0 z-20">
