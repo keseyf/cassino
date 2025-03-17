@@ -61,8 +61,8 @@ export function UosevenPage() {
 
             <div className="flex gap-4 bg-emerald-800 items-center flex-col h-full justify-center w-full shadow-lg" style={{ height: "calc(100vh - 374px)" }}>
                 <div className={`flex transition-opacity duration-500 ${rolling ? "opacity-0" : "opacity-100"}`}>
-                    <img src={`public/dice${dice ? dice.d1 : 1}.png`} alt="Dado 1" className="w-24 h-24" />
-                    <img src={`public/dice${dice ? dice.d2 : 1}.png`} alt="Dado 2" className="w-24 h-24" />
+                    <img src={`/dice${dice ? dice.d1 : 1}.png`} alt="Dado 1" className="w-24 h-24" />
+                    <img src={`/dice${dice ? dice.d2 : 1}.png`} alt="Dado 2" className="w-24 h-24" />
                 </div>
                 {result && <div className="text-white text-center mt-4">{result}</div>}
             </div>
