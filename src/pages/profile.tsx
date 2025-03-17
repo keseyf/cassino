@@ -37,7 +37,7 @@ export default function Profile() {
 
     async function fetchUserData() {
         try {
-            const response = await axios.post<UserData>("http://localhost:4040/api/user/profile",
+            const response = await axios.post<UserData>("https://api-cassino-nine.vercel.app/api/user/profile ",
                 { authToken },
                 {
                     headers: {
