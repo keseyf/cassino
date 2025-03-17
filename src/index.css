@@ -3,3 +3,35 @@
 *{
  box-sizing: border-box;
 }
+
+:root{
+  @apply bg-neutral-100 text-neutral-200
+}
+
+@theme {
+    --animate-popup: wiggle 3s ease-in-out ;
+    @keyframes wiggle {
+      0%{
+        opacity: 0;
+        transform: translate(0px, 80px);
+      }
+      25{
+        opacity: 1;
+        transform: translate(0px, 25px);
+      }
+      50% {
+        transform: translate(0px, 25px);
+      }
+      85{
+        opacity: 0;
+        transform: translate(0px, 25px);
+      }
+      100% {
+        transform: translate(0px, 80px);
+      }
+    }
+  }
+
+
+
+
