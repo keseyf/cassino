@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const navigate = useNavigate();
-    const authToken = localStorage.getItem("authToken"); // Obtém o token diretamente
+    const authToken = localStorage.getItem("authTokenbb"); // Obtém o token diretamente
 
     // Se o usuário estiver autenticado, redireciona imediatamente
     useEffect(() => {

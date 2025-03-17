@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Index() {
     const navigate = useNavigate();
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("authTokenbb");
 
     useEffect(() => {
         if (token) {

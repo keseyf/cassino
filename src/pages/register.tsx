@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register() {
     const navigate = useNavigate();
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("authTokenbb");
 
     useEffect(() => {
         if (authToken) {

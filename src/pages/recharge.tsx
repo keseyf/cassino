@@ -6,7 +6,7 @@ import handleRecharge from "../handlers/handleRecharge";
 
 export default function RechargePage() {
     const navigate = useNavigate();
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("authTokenbb");
     const [loading, setLoading] = useState(false);
     const [rechargeValue, setRechargeValue] = useState<string>(""); // Agora é string para evitar problemas de entrada
     const [canInteract, setCanInteract] = useState(true);

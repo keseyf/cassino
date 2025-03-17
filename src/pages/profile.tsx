@@ -22,7 +22,7 @@ interface UserData {
 export default function Profile() {
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("authTokenbb");
     const navigate = useNavigate();
 
     useEffect(() => {

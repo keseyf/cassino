@@ -6,7 +6,7 @@ import { HouseGames } from "../components/gamesSections";
 
 export default function Games() {
     const navigate = useNavigate();
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("authTokenbb");
 
     useEffect(() => {
         if (!authToken) {

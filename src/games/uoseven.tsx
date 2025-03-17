@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 export function UosevenPage() {
     const cs = ["under", "equal", "over"];
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("authTokenbb");
     const [dice, setDice] = useState<{ d1: number; d2: number } | null>(null);
     const [bet, setBet] = useState<number | null>(null);
     const [c, setC] = useState("");
