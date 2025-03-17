@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import GameCard from "../components/GameCard";
 import Header from "../components/Header";
 import DownMenu from "../components/DownMenu";
 import { HouseGames } from "../components/gamesSections";
