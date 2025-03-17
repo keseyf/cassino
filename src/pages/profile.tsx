@@ -87,7 +87,7 @@ export default function Profile() {
                         {userData ? (
                             <div>
                                 <div className="flex gap-3">
-                                    <img className="w-1/6 sm:w-1/10 rounded" src="../assets/a.png" alt="" />
+                                    <img className="w-1/6 sm:w-1/10 rounded" src="../public/a.png" alt="" />
                                     <div className="flex flex-col">
                                         <p className="text-gray-800 text-base">Nome de usuário: <span className="font-semibold">{userData.username}</span></p>
 
