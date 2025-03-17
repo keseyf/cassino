@@ -4,7 +4,7 @@ import { GiTwoCoins } from "react-icons/gi";
 import { IoIosRefresh } from "react-icons/io";
 
 export default function Header() {
-  const authToken = localStorage.getItem("authToken");
+  const authToken = localStorage.getItem("authTokenbb");
   const [balance, setBalance] = useState<number | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
