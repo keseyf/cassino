@@ -3,7 +3,7 @@ import axios from "axios";
 export default async function handleRecharge(rv: number, authToken: string) {
   try {
     const response = await axios.post(
-      "http://localhost:4040/api/user/recharge",
+      "https://api-cassino-nine.vercel.app/api/user/recharge ",
       { rv, authToken },
       {
         headers: {

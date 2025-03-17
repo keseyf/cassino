@@ -30,7 +30,7 @@ export function UosevenPage() {
         setResult("Rolando Dados...");
 
         setTimeout(async () => {
-            const response = await fetch("http://localhost:4040/api/games/uoseven", {
+            const response = await fetch("https://api-cassino-nine.vercel.app/api/games/uoseven", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ a: authToken, b: bet, c: c }),
