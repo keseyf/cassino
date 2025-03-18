@@ -41,7 +41,7 @@ export function UosevenPage() {
         try {
             setLoading(true);
             const response = await axios.post(
-                "http://localhost:4040/api/getBalance",
+                "https://api-cassino-nine.vercel.app/api/getBalance",
                 { authToken },
                 {
                     headers: {
