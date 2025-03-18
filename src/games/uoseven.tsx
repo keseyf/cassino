@@ -118,11 +118,15 @@ export function UosevenPage() {
 
     // Função para garantir que o valor da aposta seja um número válido
     const handleBetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Number(e.target.value);
-        if (!isNaN(value)) {
-            setBet(value);
+        let value = parseFloat(e.target.value);
+
+        if (isNaN(value) || value < 0) {
+            value = 0; // Impede valores negativos ou inválidos
         }
+
+        setBet(Number(value.toFixed(2))); // Garante duas casas decimais, mas mantém um número
     };
+
 
     return (
         <div className="flex flex-col items-center h-screen bg-gray-100">
@@ -163,7 +167,7 @@ export function UosevenPage() {
                             type="number"
                             placeholder="Aposta"
                             className="border flex-1 rounded border-white/50 p-2 focus:outline-none focus:border-zinc-600 duration-200"
-                            value={bet.toFixed(2) || ""}
+                            value={bet || ""}
                             onChange={handleBetChange}
                         />
                         <button
