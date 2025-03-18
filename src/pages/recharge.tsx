@@ -96,20 +96,20 @@ export default function RechargePage() {
 
     return (
         <main className="text-zinc-7000 min-h-screen flex flex-col">
-            <section className="sticky top-0 z-10 bg-white shadow-md">
+            <section className="sticky top-0 z-10 bg-neutral-900 shadow-md">
                 <Header />
             </section>
 
             <section className={`flex flex-col items-center justify-center py-8 px-4 w-full ${canInteract ? "pointer-events-auto" : "pointer-events-none"}`} style={{ flex: 1 }}>
                 {pixKey ? (
-                    <div className="bg-white shadow-xl rounded-xl p-6 w-full max-w-md space-y-6">
-                        <h1 className="text-3xl font-extrabold text-center text-blue-500">Chave Pix Gerada</h1>
-                        <div className="text-center text-gray-600 space-y-1">
+                    <div className="bg-neutral-900 shadow-xl rounded-xl p-6 w-full max-w-md space-y-6">
+                        <h1 className="text-3xl font-extrabold text-center">Chave Pix Gerada</h1>
+                        <div className="text-center text-neutral-300 space-y-1">
                             <p className="text-sm">Use a chave abaixo para realizar o pagamento.</p>
                         </div>
 
                         <div className="mt-4">
-                            <span className="block bg-gray-100 text-zinc-700 p-4 rounded-lg break-words">{pixKey}</span>
+                            <span className="block bg-neutral-800 inset-shadow shadow-xl text-neutral-200 p-4 rounded-lg break-words">{pixKey}</span>
                             <button
                                 type="button"
                                 onClick={copyToClipboard}
@@ -117,13 +117,13 @@ export default function RechargePage() {
                             >
                                 Copiar Chave Pix
                             </button>
-                            <p className="text-sm text-zinc-700 my-5 text-center">Ao realizar recarga, recarregue o saldo para verificar se pagamento caiu!</p>
+                            <p className="text-sm text-neutral-300 my-5 text-center">Ao realizar recarga, recarregue o saldo para verificar se pagamento caiu!</p>
                         </div>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-xl p-6 w-full max-w-md space-y-6">
-                        <h1 className="text-3xl font-extrabold text-center text-blue-500">Recarga</h1>
-                        <div className="text-center text-gray-600 space-y-1">
+                    <form onSubmit={handleSubmit} className="bg-neutral-900 shadow-xl rounded-xl p-6 w-full max-w-md space-y-6">
+                        <h1 className="text-3xl font-extrabold text-center ">Recarga</h1>
+                        <div className="text-center text-neutral-500 space-y-1">
                             <p className="text-sm">Etapa 1: Selecione ou insira o valor.</p>
                             <p className="text-sm">Etapa 2: Gere um código de recarga.</p>
                         </div>
@@ -134,7 +134,7 @@ export default function RechargePage() {
                                     key={value}
                                     type="button"
                                     onClick={() => handleRechargeValueClick(value)}
-                                    className="bg-gray-200 hover:bg-gray-300 text-zinc-700 p-4 rounded-lg transition-all duration-200 transform hover:scale-105"
+                                    className="bg-neutral-800 hover:bg-neutral-300 text-neutral-100 hover:text-black p-4 rounded-lg transition-all duration-200 transform hover:scale-105"
                                 >
                                     {value}
                                 </button>
@@ -143,7 +143,7 @@ export default function RechargePage() {
 
                         <div className="flex items-center justify-center mt-4">
                             <input
-                                className="appearance-none w-full p-3 text-lg bg-gray-100 text-zinc-700 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                                className="appearance-none w-full p-3 text-lg bg-neutral-900 text-zinc-300 rounded-lg border border-neutral-800 focus:outline-none focus:border-neutral-700 transition duration-200"
                                 type="text"
                                 value={rechargeValue}
                                 placeholder="Valor:"
@@ -152,13 +152,13 @@ export default function RechargePage() {
                         </div>
 
                         <div className="flex flex-col items-start mt-2 space-y-2">
-                            {log && <p className="text-sm text-green-600">{log}</p>}
-                            {error && <p className="text-sm text-red-600">{error}</p>}
+                            {log && <p className="text-sm text-green-500">{log}</p>}
+                            {error && <p className="text-sm text-red-500">{error}</p>}
                         </div>
 
                         <button
                             type="submit"
-                            className={`w-full py-3 text-lg rounded-lg mt-6 ${rechargeValue && !error ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-400 cursor-not-allowed"} `}
+                            className={`w-full py-3 text-lg rounded-lg mt-6 ${rechargeValue && !error ? "bg-blue-600 hover:bg-blue-700" : "bg-neutral-700 cursor-not-allowed"} `}
                             disabled={!rechargeValue || !!error}
                         >
                             {loading ? "Carregando..." : "Enviar"}

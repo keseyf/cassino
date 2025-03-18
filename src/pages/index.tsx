@@ -9,7 +9,7 @@ export default function Index() {
         if (token) {
             navigate("/games");
         } else {
-            navigate("/register");
+            navigate("/login");
         }
     }, [token, navigate]); // Executa quando o token mudar
 

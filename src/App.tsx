@@ -7,6 +7,7 @@ import TermsPage from "./pages/terms"
 import RechargePage from "./pages/recharge"
 import Profile from "./pages/profile"
 import { UosevenPage } from "./games/uoseven"
+import Withdrawl from "./pages/widthdraw"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/recharge" element={<RechargePage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/games/underover7" element={<UosevenPage />} />
+        <Route path="/withdraw" element={<Withdrawl />} />
 
       </Routes>
     </BrowserRouter>

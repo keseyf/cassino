@@ -4,7 +4,7 @@ import { MdMoney } from "react-icons/md";
 
 export default function DownMenu() {
     return (
-        <section className="flex w-full bg-zinc-900">
+        <section className="flex w-full bg-neutral-900">
             <nav className="w-full">
                 <ul className="flex w-full text-xs sm:text-base list-none">
                     <li className="flex-1">
@@ -20,7 +20,7 @@ export default function DownMenu() {
                         </a>
                     </li>
                     <li className="flex-1">
-                        <a href="/" className="flex duration-200 delay-50 hover:bg-blue-600 flex-col items-center justify-center p-3.5">
+                        <a href="/withdraw" className="flex duration-200 delay-50 hover:bg-blue-600 flex-col items-center justify-center p-3.5">
                             <MdMoney size={20} />
                             Saque
                         </a>

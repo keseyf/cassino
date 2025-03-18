@@ -40,7 +40,7 @@ export default function Header() {
   }, [authToken]);
 
   return (
-    <header className="bg-zinc-900 p-3 shadow-xl text-gray-200">
+    <header className="bg-neutral-900 p-3 shadow-xl text-gray-200">
       <nav className="flex justify-between items-center">
         <article className="flex items-center justify-between w-full space-x-4">
           <section className="flex gap-2 flex-row-reverse items-center">

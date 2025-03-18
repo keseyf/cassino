@@ -51,13 +51,13 @@ export default function Register() {
 
     return (
         <div className="flex items-center justify-center h-screen">
-            <div className="flex flex-col sm:w-1/2 lg:w-1/3 shadow-2xl px-8 py-10 text-gray-700 space-y-5 bg-white rounded-lg">
-                <h1 className="text-center text-xl font-semibold text-gray-700">Cadastre-se</h1>
-                <form onSubmit={handleSubmit} className="flex flex-col text-gray-700 space-y-4">
+            <div className="flex flex-col sm:w-1/2 lg:w-1/3 shadow-2xl px-8 py-10 text-gray-300 space-y-5 bg-neutral-900 rounded-lg">
+                <h1 className="text-center text-xl font-semibold text-gray-300">Cadastre-se</h1>
+                <form onSubmit={handleSubmit} className="flex flex-col text-gray-100 space-y-4">
                     <input
                         type="text"
                         placeholder="Usuário"
-                        className="border border-gray-300 p-2 focus:outline-none focus:border-gray-500 duration-200"
+                        className="border border-neutral-500/20 p-2 rounded-xs focus:outline-none focus:border-neutral-400 duration-200"
                         required
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -65,7 +65,7 @@ export default function Register() {
                     <input
                         type="email"
                         placeholder="Email"
-                        className="border border-gray-300 p-2 focus:outline-none focus:border-gray-500 duration-200"
+                        className="border border-neutral-500/20 p-2 rounded-xs focus:outline-none focus:border-neutral-400 duration-200"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -73,7 +73,7 @@ export default function Register() {
                     <input
                         type={type}
                         placeholder="Senha"
-                        className="border border-gray-300 p-2 focus:outline-none focus:border-gray-500 duration-200"
+                        className="border border-neutral-500/20 p-2 rounded-xs focus:outline-none focus:border-neutral-400 duration-200"
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -81,18 +81,18 @@ export default function Register() {
                     <input
                         type={type}
                         placeholder="Confirmar senha"
-                        className="border border-gray-300 p-2 focus:outline-none focus:border-gray-500 duration-200"
+                        className="border border-neutral-500/20 p-2 rounded-xs focus:outline-none focus:border-neutral-400 duration-200"
                         required
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <div className="flex gap-2 flex-row-reverse justify-end items-center">
-                        <label htmlFor="show" className="text-sm text-gray-700">Mostrar senha</label>
+                        <label htmlFor="show" className="text-sm text-gray-300">Mostrar senha</label>
                         <input
                             name="show"
                             type="checkbox"
                             onChange={changeType}
-                            className="w-4 h-4 appearance-none border border-black/30 rounded bg-transparent checked:bg-blue-600 focus:outline-none cursor-pointer"
+                            className="w-4 h-4 appearance-none border border-white/30 rounded bg-transparent checked:bg-blue-500 focus:outline-none cursor-pointer"
                         />
                     </div>
                     <button
@@ -102,11 +102,11 @@ export default function Register() {
                     >
                         {loading ? "Carregando..." : "Enviar"}
                     </button>
-                    <p className="text-sm text-gray-600 text-center">
-                        Ao criar uma conta você concorda com os <a href="/terms" className="text-blue-600">Termos de uso</a>
+                    <p className="text-sm text-gray-300 text-center">
+                        Ao criar uma conta você concorda com os <a href="/terms" className="text-blue-500">Termos de uso</a>
                     </p>
-                    <span className="text-sm text-center text-gray-600">
-                        Já possui conta? <a href="/login" className="text-blue-600">Conecte-se</a>
+                    <span className="text-sm text-center text-gray-300">
+                        Já possui conta? <a href="/login" className="text-blue-500">Conecte-se</a>
                     </span>
 
 

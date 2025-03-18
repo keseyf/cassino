@@ -1,23 +1,68 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import DownMenu from "../components/DownMenu";
 import Header from "../components/Header";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function UosevenPage() {
     const cs = ["under", "equal", "over"];
     const authToken = localStorage.getItem("authTokenbb");
-    const [dice, setDice] = useState<{ d1: number; d2: number } | null>(null);
-    const [bet, setBet] = useState<number | null>(null);
-    const [c, setC] = useState("");
-    const [result, setResult] = useState<string>("");
-    const [rolling, setRolling] = useState(false);
-    const [showWinModal, setShowWinModal] = useState(false);
 
-    // 🔊 Pré-carregar os sons
+    // States
+    const [dice, setDice] = useState<{ d1: number; d2: number } | null>(null);
+    const [bet, setBet] = useState<number>(0); // Aposta inicial
+    const [c, setC] = useState<string>("");
+    const [result, setResult] = useState<string>("");
+    const [rolling, setRolling] = useState<boolean>(false);
+    const [showWinModal, setShowWinModal] = useState<boolean>(false);
+    const [balance, setBalance] = useState<number | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    // Refs para sons
     const winSoundRef = useRef(new Audio("/win.mp3"));
     const diceSoundRef = useRef(new Audio("/dice.mp3"));
 
+    // Carregar saldo ao montar o componente
+    useEffect(() => {
+        if (authToken) {
+            fetchBalance();
+        }
+    }, [authToken]);
+
+    if (!authToken) {
+        localStorage.removeItem("authTokenbb")
+        const navigate = useNavigate()
+        navigate("/login")
+        return null
+    }
+
+    // Função para buscar o saldo
+    const fetchBalance = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                "http://localhost:4040/api/getBalance",
+                { authToken },
+                {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                }
+            );
+            setBalance(response.data.balance);
+        } catch (error) {
+            console.error("Erro ao obter o saldo:", error);
+            localStorage.removeItem("authToken");
+            window.location.href = "/login";
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Função para rolar os dados
     const rollDice = async () => {
-        if (!bet) {
+        setLoading(true)
+        if (bet <= 0) {
             setResult("Insira um valor antes de apostar!");
             return;
         }
@@ -27,11 +72,11 @@ export function UosevenPage() {
         }
 
         if (bet < 0.5) {
-            setResult("Minimo de aposta: R$0.50");
+            setResult("Mínimo de aposta: R$0.50");
             return;
         }
 
-        setRolling(true); // Ativa a animação de fade-out dos dados
+        setRolling(true);
         setResult("Rolando Dados...");
 
         setTimeout(async () => {
@@ -42,24 +87,45 @@ export function UosevenPage() {
             });
 
             const data = await response.json();
-            setDice({ d1: data.d1, d2: data.d2 });
+            if (!data.d1 || !data.d2) {
+                setDice({ d1: 1, d2: 1 });
+            } else {
+
+                setDice({ d1: data.d1, d2: data.d2 });
+            }
             setResult(data.message);
 
-            // 🎲 Toca o som dos dados
             diceSoundRef.current.play();
 
-            setRolling(false); // Animação de fade-in
+            setRolling(false);
 
             if (data.message === "Ganho!") {
-                // 🔊 Toca o som de vitória
                 winSoundRef.current.play();
                 setShowWinModal(true);
             }
-        }, 1500); // Tempo da animação antes de mostrar os dados
+
+            setLoading(false)
+            fetchBalance();
+        }, 1500);
+    };
+
+    // Função para definir o valor máximo de aposta
+    const handleMaxBet = async () => {
+        if (balance && balance > 0) {
+            setBet(balance);
+        }
+    };
+
+    // Função para garantir que o valor da aposta seja um número válido
+    const handleBetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(e.target.value);
+        if (!isNaN(value)) {
+            setBet(value);
+        }
     };
 
     return (
-        <div className="flex flex-col relative items-center h-screen bg-gray-100">
+        <div className="flex flex-col items-center h-screen bg-gray-100">
             <section className="sticky w-full top-0 z-20">
                 <Header />
             </section>
@@ -72,30 +138,49 @@ export function UosevenPage() {
                 {result && <div className="text-white text-center mt-4">{result}</div>}
             </div>
 
-            <div className="flex flex-col w-full h-fit gap-2 flex-1 py-5 bg-zinc-800">
+            <div className="flex flex-col w-full h-fit gap-2 space-y-4 flex-1 py-5 bg-neutral-950">
                 <div className="flex gap-2 px-5 w-full">
                     {cs.map((option, index) => (
                         <button
                             key={option}
-                            className={`flex-1 text-center py-3 px-6 rounded-lg text-white font-semibold transition-all duration-300 ${c === option ? "bg-blue-600" : "bg-gray-700 hover:bg-gray-600"}`}
+                            className={`flex-1 text-center py-3 px-6 rounded-lg text-white font-semibold transition-all duration-300 ${c === option ? "bg-blue-500" : "bg-neutral-800 hover:bg-gray-600"}`}
                             onClick={() => setC(option)}
                         >
                             {index === 0 ? "Menor" : index === 1 ? "Igual" : "Maior"}
                         </button>
                     ))}
                 </div>
-                <div className="flex px-6 h-fit w-full gap-2 justify-evenly content-center items-center">
+
+                <div className="flex flex-col px-6 h-fit w-full space-y-4 gap-2 justify-evenly content-center items-center">
+                    <div className="flex w-full gap-3">
+                        <button
+                            onClick={handleMaxBet}
+                            className="border rounded flex-1 border-gray-600/20 p-2 focus:outline-none focus:border-zinc-600 duration-200"
+                        >
+                            Max
+                        </button>
+                        <input
+                            type="number"
+                            placeholder="Aposta"
+                            className="border flex-1 rounded border-white/50 p-2 focus:outline-none focus:border-zinc-600 duration-200"
+                            value={bet.toFixed(2) || ""}
+                            onChange={handleBetChange}
+                        />
+                        <button
+                            onClick={() => setBet(0.5)}
+                            className="border rounded flex-1 border-gray-600/20 p-2 focus:outline-none focus:border-zinc-600 duration-200"
+                        >
+                            Min
+                        </button>
+                    </div>
+
                     <input
-                        type="number"
-                        placeholder="Aposta"
-                        className="border flex-1 border-gray-600/20 p-2 focus:outline-none focus:border-zinc-600 duration-200"
-                        required
-                        onChange={(e) => {
-                            const value = Number(e.target.value);
-                            if (!isNaN(value)) setBet(value);
-                        }}
+                        type="submit"
+                        value="Jogar Dados"
+                        disabled={(loading ? true : false)}
+                        onClick={rollDice}
+                        className={`py-3 w-full px-6 font-semibold rounded-lg shadow-md transition-all duration-300 ${loading ? "!bg-neutral-800 !text-neutral-500" : "!bg-emerald-500 hover:!bg-emerald-600 !text-white "}`}
                     />
-                    <input type="submit" value="Jogar Dados" onClick={rollDice} className="py-3 px-6 bg-blue-500 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-600" />
                 </div>
             </div>
 
@@ -103,15 +188,14 @@ export function UosevenPage() {
                 <DownMenu />
             </div>
 
-            {/* Modal de vitória */}
             {showWinModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/30 bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                        <h2 className="text-2xl font-bold text-green-600">🎉 Você Ganhou! 🎉</h2>
-                        <p className="mt-2 text-zinc-700">Parabéns, sua aposta foi bem-sucedida!</p>
+                    <div className="bg-neutral-900 p-6 rounded-lg shadow-lg text-center">
+                        <h2 className="text-2xl font-bold text-green-500">🎉 Você Ganhou! 🎉</h2>
+                        <p className="mt-2 text-zinc-200">Parabéns, sua aposta foi bem-sucedida!</p>
                         <button
                             onClick={() => setShowWinModal(false)}
-                            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700"
+                            className="mt-4 px-4 py-2 duration-200 shadow-2xl bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                         >
                             Fechar
                         </button>

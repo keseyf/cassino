@@ -21,11 +21,16 @@ export default function Games() {
                 <Header />
             </section>
 
-            <article className="flex items-center w-full flex-col flex-grow">
-                <HouseGames />
+            <article className="flex p-2 w-full flex-col flex-grow">
+                <h1 className=" text-xl my-2 font-semibold text-neutral-200 italic">Games BirdBet Inc.</h1>
+                <hr className="border-white/5 mt-1 mb-4" />
+                <section className="w-full">
+
+                    <HouseGames />
+                </section>
 
             </article>
-            <div className="my-10 text-center text-gray-600">
+            <div className="my-10 text-center text-gray-200">
                 <p className="text-lg">Mais jogos em breve! Fique ligado.</p>
                 <p className="mt-2">Enquanto isso, aproveite o <strong>under over 7</strong>!</p>
             </div>

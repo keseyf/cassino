@@ -54,20 +54,20 @@ export default function Login() {
 
     return (
         <div className="flex items-center justify-center h-screen">
-            <div className="flex flex-col shadow-2xl px-8 max-w-2/3 sm:max-w-2/4 md:max-w-2/6 xl:max-w-1/4 py-10 space-y-5 bg-white text-gray-700 rounded-lg">
+            <div className="flex flex-col shadow-2xl px-8 max-w-2/3 sm:max-w-2/4 md:max-w-2/6 xl:max-w-1/4 py-10 space-y-5 bg-neutral-900 text-gray-300 rounded-lg">
                 <h1 className="text-center text-xl font-semibold">Conectar-se</h1>
                 <form onSubmit={handleSubmit} className="flex  flex-col space-y-4">
                     <input
                         type="email"
                         placeholder="Email"
-                        className="border border-gray-600/20 p-2 focus:outline-none focus:border-zinc-600 duration-200"
+                        className="border border-neutral-500/20 p-2 rounded-xs focus:outline-none focus:border-neutral-400 duration-200"
                         required
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                         type={type}
                         placeholder="Senha"
-                        className="border border-gray-600/20 p-2 focus:outline-none focus:border-zinc-600 duration-200"
+                        className="border border-neutral-500/20 p-2 rounded-xs focus:outline-none focus:border-neutral-400 duration-200"
                         required
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -77,7 +77,7 @@ export default function Login() {
                             name="show"
                             type="checkbox"
                             onChange={changeType}
-                            className="w-4 h-4 appearance-none border border-black/30 rounded bg-transparent checked:bg-blue-600 focus:outline-none cursor-pointer"
+                            className="w-4 h-4 appearance-none border border-white/30 rounded bg-transparent checked:bg-blue-500 focus:outline-none cursor-pointer"
                         />
                     </div>
                     <input
