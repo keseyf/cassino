@@ -26,6 +26,11 @@ export function UosevenPage() {
             return;
         }
 
+        if (bet < 0.5) {
+            setResult("Minimo de aposta: R$0.50");
+            return;
+        }
+
         setRolling(true); // Ativa a animação de fade-out dos dados
         setResult("Rolando Dados...");
 
